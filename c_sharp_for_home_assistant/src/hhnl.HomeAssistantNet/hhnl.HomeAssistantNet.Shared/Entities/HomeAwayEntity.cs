@@ -10,6 +10,7 @@ namespace hhnl.HomeAssistantNet.Shared.Entities
 
         public bool IsHome => base.State == "home";
         
-        public bool IsAway => base.State == "away";
+        //public bool IsAway => base.State == "away";
+        public bool IsAway => base.State == "not_home";
     }
 }
