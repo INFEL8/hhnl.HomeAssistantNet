@@ -22,7 +22,10 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
         /// Enqueues a new automation and waits for it's start.
         /// </summary>
         /// <param name="automation">The automation to start.</param>
-        Task EnqueueAutomationAsync(AutomationEntry automation, StartReason reason, string? reasonMessage = null, Events.Current? currentEvent = null, bool waitForStart = false);
+        Task EnqueueAutomationAsync(AutomationEntry automation
+            , string? eventCallerEntityId
+            , StartReason reason, string? reasonMessage = null, Events.Current? currentEvent = null
+            , bool waitForStart = false);
 
         Task StopAutomationRunAsync(AutomationEntry automation, AutomationRunInfo run);
     }
@@ -50,14 +53,16 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
             _serviceProvider = serviceProvider;
         }
 
-        public async Task EnqueueAutomationAsync(AutomationEntry automation, StartReason reason, string? reasonMessage, Events.Current? currentEvent, bool waitForStart = false)
+        public async Task EnqueueAutomationAsync(AutomationEntry automation
+            , string eventCallerEntityId
+            , StartReason reason, string? reasonMessage, Events.Current? currentEvent, bool waitForStart = false)
         {
             TaskCompletionSource? tcs = null;
 
             if (waitForStart)
                 tcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
 
-            await EnqueueAutomationRunAsync(automation, reason, reasonMessage, tcs, currentEvent ?? Events.Empty);
+            await EnqueueAutomationRunAsync(automation, eventCallerEntityId, reason, reasonMessage, tcs, currentEvent ?? Events.Empty);
 
             if (tcs is not null)
                 await Task.WhenAny(tcs.Task, Task.Delay(TimeSpan.FromSeconds(2)));
@@ -127,6 +132,7 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
 
         private Task EnqueueAutomationRunAsync(
             AutomationEntry entry,
+            string eventCallerEntityId,
             StartReason reason,
             string? reasonMessage,
             TaskCompletionSource? startTcs,
@@ -153,7 +159,7 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
                     return runner;
                 }));
 
-            return runner.Value.EnqueueAsync(reason, reasonMessage, startTcs, snapshot ?? _emptySnapshot);
+            return runner.Value.EnqueueAsync(eventCallerEntityId, reason, reasonMessage, startTcs, snapshot ?? _emptySnapshot);
 
             object CreateEntitySnapshot(Type entityType)
             {

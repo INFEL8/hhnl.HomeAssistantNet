@@ -62,14 +62,14 @@ namespace hhnl.HomeAssistantNet.Automations.Automation.Runner
             await base.StopRunAsync(run);
         }
 
-        public override async Task EnqueueAsync(
+        public override async Task EnqueueAsync(string eventCallerEntityId,
             AutomationRunInfo.StartReason reason,
             string? reasonMessage,
             TaskCompletionSource? startTcs,
             IReadOnlyDictionary<Type, object> snapshot)
         {
             _logger.LogTrace("Create automation");
-            var run = CreateAutomationRun(reason, reasonMessage, startTcs, snapshot, AutomationRunInfo.RunState.WaitingInQueue);
+            var run = CreateAutomationRun(eventCallerEntityId, reason, reasonMessage, startTcs, snapshot, AutomationRunInfo.RunState.WaitingInQueue);
 
             if (!_nextSemaphore.Wait(0))
             {

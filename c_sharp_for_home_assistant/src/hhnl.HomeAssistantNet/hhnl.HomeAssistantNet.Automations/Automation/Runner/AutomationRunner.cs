@@ -24,7 +24,7 @@ namespace hhnl.HomeAssistantNet.Automations.Automation.Runner
 
         protected AutomationEntry Entry { get; }
 
-        public abstract Task EnqueueAsync(
+        public abstract Task EnqueueAsync(string eventCallerEntityId,
             AutomationRunInfo.StartReason reason,
             string? reasonMessage,
             TaskCompletionSource? startTcs,
@@ -50,6 +50,7 @@ namespace hhnl.HomeAssistantNet.Automations.Automation.Runner
         protected Task PublishRunChangedAsync(AutomationRunInfo run) => _provider.GetRequiredService<IMediator>().Publish(new AutomationRunStateChangedNotification(Entry, run));
 
         protected AutomationRunInfo CreateAutomationRun(
+            string eventCallerEntityId,
             AutomationRunInfo.StartReason reason,
             string? reasonMessage,
             TaskCompletionSource? startTcs,
@@ -65,6 +66,7 @@ namespace hhnl.HomeAssistantNet.Automations.Automation.Runner
                 Reason = reason,
                 ReasonMessage = reasonMessage,
                 EntitySnapshot = snapshot,
+                EventCallerEntityId = eventCallerEntityId,
             };
 
             run.Start = () =>

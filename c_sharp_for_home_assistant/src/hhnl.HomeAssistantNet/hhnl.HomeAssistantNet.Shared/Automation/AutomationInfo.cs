@@ -44,7 +44,7 @@ namespace hhnl.HomeAssistantNet.Shared.Automation
         /// The entities that are served as snapshot.
         /// </summary>
         [JsonIgnore]
-        public IReadOnlyCollection<Type> SnapshotEntities { get; set;  }
+        public IReadOnlyCollection<Type> SnapshotEntities { get; set; }
 
         [JsonIgnore]
         public Func<IServiceProvider, CancellationToken, Task> RunAutomation { get; set; }
@@ -53,6 +53,5 @@ namespace hhnl.HomeAssistantNet.Shared.Automation
         public MethodInfo Method { get; set; }
 
         public ReentryPolicy ReentryPolicy { get; set; }
-
     }
 }

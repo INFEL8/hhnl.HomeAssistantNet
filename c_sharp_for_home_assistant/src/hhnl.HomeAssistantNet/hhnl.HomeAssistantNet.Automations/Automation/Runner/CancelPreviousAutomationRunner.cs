@@ -11,14 +11,14 @@ namespace hhnl.HomeAssistantNet.Automations.Automation.Runner
         {
         }
 
-        public override Task EnqueueAsync(
+        public override Task EnqueueAsync(string eventCallerEntityId,
             AutomationRunInfo.StartReason reason,
             string? reasonMessage,
             TaskCompletionSource? startTcs,
             IReadOnlyDictionary<Type, object> snapshot)
         {
             Entry.LatestRun?.CancellationTokenSource?.Cancel();
-            return base.EnqueueAsync(reason, reasonMessage, startTcs, snapshot);
+            return base.EnqueueAsync(eventCallerEntityId, reason, reasonMessage, startTcs, snapshot);
         }
     }
 }

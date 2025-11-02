@@ -15,7 +15,7 @@ namespace hhnl.HomeAssistantNet.Automations.Automation.Runner
         {
         }
 
-        public override async Task EnqueueAsync(
+        public override async Task EnqueueAsync(string eventCallerEntityId,
             AutomationRunInfo.StartReason reason,
             string? reasonMessage,
             TaskCompletionSource? startTcs,
@@ -32,7 +32,7 @@ namespace hhnl.HomeAssistantNet.Automations.Automation.Runner
                     return;
                 }
 
-                var run = CreateAutomationRun(reason, reasonMessage, startTcs, snapshot);
+                var run = CreateAutomationRun(eventCallerEntityId, reason, reasonMessage, startTcs, snapshot);
                 
                 Entry.AddRun(run);
                 run.Start();

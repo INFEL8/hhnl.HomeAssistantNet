@@ -21,12 +21,14 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
 
         public async Task Handle(HomeAssistantClient.EventFiredNotification notification, CancellationToken cancellationToken)
         {
-            var automations = _automationRegistry.GetAutomationsTrackingEntity(Events.Any.UniqueId);
+            var eventCallerEntityId = Events.Any.UniqueId;
+            var automations = _automationRegistry.GetAutomationsTrackingEntity(eventCallerEntityId);
 
             // Run automations
             foreach (var automation in automations)
             {
-                await _automationService.EnqueueAutomationAsync(automation, Shared.Automation.AutomationRunInfo.StartReason.EventFired, $"Event {notification.Event.EventType} fired.", notification.Event);
+                await _automationService.EnqueueAutomationAsync(automation, eventCallerEntityId
+                    , Shared.Automation.AutomationRunInfo.StartReason.EventFired, $"Event {notification.Event.EventType} fired.", notification.Event);
             }
         }
     }

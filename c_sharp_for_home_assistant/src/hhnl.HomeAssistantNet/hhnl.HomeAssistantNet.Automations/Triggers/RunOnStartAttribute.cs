@@ -13,7 +13,7 @@ namespace hhnl.HomeAssistantNet.Automations.Triggers
     {
         public override Task RegisterTriggerAsync(AutomationEntry automation, IAutomationService automationService, IServiceProvider serviceProvider)
         {
-            return automationService.EnqueueAutomationAsync(automation, AutomationRunInfo.StartReason.RunOnStart);
+            return automationService.EnqueueAutomationAsync(automation, null, AutomationRunInfo.StartReason.RunOnStart);
         }
     }
 }

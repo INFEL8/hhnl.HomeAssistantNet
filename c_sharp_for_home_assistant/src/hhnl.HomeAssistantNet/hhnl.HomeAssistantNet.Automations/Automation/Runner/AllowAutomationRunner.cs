@@ -15,13 +15,13 @@ namespace hhnl.HomeAssistantNet.Automations.Automation.Runner
         {
         }
 
-        public override Task EnqueueAsync(
+        public override Task EnqueueAsync(string eventCallerEntityId,
             AutomationRunInfo.StartReason reason,
             string? reasonMessage,
             TaskCompletionSource? startTcs,
             IReadOnlyDictionary<Type, object> snapshot)
         {
-            var run = CreateAutomationRun(reason, reasonMessage, startTcs, snapshot);
+            var run = CreateAutomationRun(eventCallerEntityId, reason, reasonMessage, startTcs, snapshot);
             
             Entry.AddRun(run);
             run.Start();

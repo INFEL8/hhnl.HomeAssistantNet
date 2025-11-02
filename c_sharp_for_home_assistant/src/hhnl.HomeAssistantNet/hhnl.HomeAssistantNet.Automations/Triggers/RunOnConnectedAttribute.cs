@@ -18,7 +18,7 @@ namespace hhnl.HomeAssistantNet.Automations.Triggers
             HomeAssistantClientConnectedNotification.Handler.RegisterAutomation(automation);
 
             // We know that we are already connected when we reach this step so we run the automation for the first time.
-            return automationService.EnqueueAutomationAsync(automation, AutomationRunInfo.StartReason.RunOnConnect);
+            return automationService.EnqueueAutomationAsync(automation, null, AutomationRunInfo.StartReason.RunOnConnect);
         }
     }
 }

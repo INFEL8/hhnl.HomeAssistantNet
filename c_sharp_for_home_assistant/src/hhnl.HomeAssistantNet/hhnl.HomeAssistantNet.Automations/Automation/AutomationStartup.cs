@@ -97,7 +97,10 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
                 .ConfigureLogging(x => x.AddProvider(new AutomationLogger.Provider()))
 
 #if DEBUG
-                .ConfigureLogging(x => x.SetMinimumLevel(LogLevel.Debug))
+                //.ConfigureLogging(x => x.SetMinimumLevel(LogLevel.Debug))
+                .ConfigureLogging(x => x.SetMinimumLevel(LogLevel.Information))
+#else
+                .ConfigureLogging(x => x.SetMinimumLevel(LogLevel.Warning))
 #endif
 
                 .UseConsoleLifetime();

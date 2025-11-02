@@ -43,13 +43,13 @@ namespace hhnl.HomeAssistantNet.Automations.Automation.Runner
             await _runTask.IgnoreCancellationAsync();
         }
 
-        public override async Task EnqueueAsync(
+        public override async Task EnqueueAsync(string eventCallerEntityId,
             AutomationRunInfo.StartReason reason,
             string? reasonMessage,
             TaskCompletionSource? startTcs,
             IReadOnlyDictionary<Type, object> snapshot)
         {
-            var run = CreateAutomationRun(reason, reasonMessage, startTcs, snapshot, AutomationRunInfo.RunState.WaitingInQueue);
+            var run = CreateAutomationRun(eventCallerEntityId, reason, reasonMessage, startTcs, snapshot, AutomationRunInfo.RunState.WaitingInQueue);
 
             await PublishRunChangedAsync(run);
 

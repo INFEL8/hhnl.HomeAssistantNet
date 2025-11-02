@@ -31,7 +31,7 @@ namespace hhnl.HomeAssistantNet.Automations.HomeAssistantConnection
             {
                 foreach (var automation in _automations)
                 {
-                    await _automationService.EnqueueAutomationAsync(automation, Shared.Automation.AutomationRunInfo.StartReason.RunOnConnect);
+                    await _automationService.EnqueueAutomationAsync(automation, null, Shared.Automation.AutomationRunInfo.StartReason.RunOnConnect);
                 }
             }
         }

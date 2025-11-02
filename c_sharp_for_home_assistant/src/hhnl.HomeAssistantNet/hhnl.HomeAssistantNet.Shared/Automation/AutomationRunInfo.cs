@@ -44,6 +44,12 @@ namespace hhnl.HomeAssistantNet.Shared.Automation
         [JsonIgnore]
         public int ServiceCallCount { get; set; }
 
+        /// <summary>
+        /// Штука по которой я смогу отличить автоматизации одинаковые по методу.
+        /// </summary>
+        //[JsonIgnore]
+        public string? EventCallerEntityId { get; set; }
+
         public enum RunState
         {
             Running,

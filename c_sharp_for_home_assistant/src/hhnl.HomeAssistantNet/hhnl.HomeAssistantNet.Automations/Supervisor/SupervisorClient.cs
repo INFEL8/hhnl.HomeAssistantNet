@@ -99,7 +99,7 @@ namespace hhnl.HomeAssistantNet.Automations.Supervisor
                 return;
             }
 
-            await _automationService.EnqueueAutomationAsync(automation, Shared.Automation.AutomationRunInfo.StartReason.Manual, waitForStart: true);
+            await _automationService.EnqueueAutomationAsync(automation, null, Shared.Automation.AutomationRunInfo.StartReason.Manual, waitForStart: true);
             await HubConnection.SendAsync("AutomationStarted", messageId, ToDto(automation));
         }
 
