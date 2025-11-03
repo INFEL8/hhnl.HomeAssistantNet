@@ -97,7 +97,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
             ProcessStartInfo? runStartInfo = new ProcessStartInfo
             {
                 FileName = "dotnet",
-                Arguments = $"{dllPath} Token={_haConfig.Value.SUPERVISOR_TOKEN} SupervisorUrl=http://localhost:20777",
+                Arguments = $"{dllPath} Token={_haConfig.Value.SUPERVISOR_TOKEN} SupervisorUrl=http://localhost:20888",
                 WorkingDirectory = deployPath,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
