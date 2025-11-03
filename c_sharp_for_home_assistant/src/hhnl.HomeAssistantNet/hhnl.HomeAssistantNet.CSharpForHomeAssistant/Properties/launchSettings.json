@@ -4,7 +4,7 @@
     "hhnl.HomeAssistantNet.Supervisor - No Deploy": {
       "commandName": "Project",
       "hotReloadProfile": "aspnetcore",
-      "applicationUrl": "http://localhost:20888",
+      "applicationUrl": "http://localhost:20777",
       "launchBrowser": true,
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
       "environmentVariables": {
@@ -18,7 +18,7 @@
       //"hotReloadProfile": "aspnetcore",
       "launchBrowser": true,
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "applicationUrl": "http://localhost:20888",
+      "applicationUrl": "http://localhost:20777",
       "environmentVariables": {
         //"ASPNETCORE_ENVIRONMENT": "Development"
         "ASPNETCORE_ENVIRONMENT": "Production"
