@@ -2,6 +2,11 @@
 
 !! MAKE SURE TO UPDATE TO THE LATEST NUGET PACKAGES !! 
 
+## [0.11.4] - 2025-10-02
+
+### Added
+- EventCallerEntityId to automation run.
+
 ## [0.11.3] - 2022-01-20
 
 ### Added
