@@ -49,7 +49,7 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
 
         public void AddRun(AutomationRunInfo run)
         {
-            lock (this)
+            lock (_runs)
             {
                 _runs.PushFront(run);
             }
