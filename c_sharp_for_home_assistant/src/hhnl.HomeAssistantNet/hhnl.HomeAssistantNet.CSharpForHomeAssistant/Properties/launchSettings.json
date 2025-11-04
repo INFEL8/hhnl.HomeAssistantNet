@@ -21,7 +21,8 @@
       "applicationUrl": "http://localhost:20777",
       "environmentVariables": {
         //"ASPNETCORE_ENVIRONMENT": "Development"
-        "ASPNETCORE_ENVIRONMENT": "Production"
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "SupervisorConfig__SuppressAutomationDeploy": "true"
       }
     }
   }
