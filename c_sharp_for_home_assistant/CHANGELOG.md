@@ -9,8 +9,7 @@
 
 ### Changed
 - AutomationEntry lock (_runs).
-- пока убрал автообновление веб страницы. от чего-то падает соединение рсигнала. а так дольше не падает.
-
+- Web autorefresh was removed because rsignal.
 
 ## [0.11.4] - 2025-10-02
 
