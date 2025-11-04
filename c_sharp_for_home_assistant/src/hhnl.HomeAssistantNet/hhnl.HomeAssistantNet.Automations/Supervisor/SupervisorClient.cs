@@ -59,6 +59,56 @@ namespace hhnl.HomeAssistantNet.Automations.Supervisor
             _hubConnection.On(nameof(IManagementClient.Shutdown), Shutdown);
             _hubConnection.On<long>(nameof(IManagementClient.GetProcessId), GetProcessId);
             _hubConnection.On<long, Guid>(nameof(IManagementClient.StartListenToRunLog), StartListenToRunLog);
+
+            _hubConnection.ServerTimeout = TimeSpan.FromMinutes(30);
+            //_hubConnection.KeepAliveInterval = TimeSpan.FromSeconds(30);
+            //_hubConnection.HandshakeTimeout = TimeSpan.FromSeconds(30);
+
+
+            /*
+    //
+    // Сводка:
+    //     The default timeout which specifies how long to wait for a message before closing
+    //     the connection. Default is 30 seconds.
+    public static readonly TimeSpan DefaultServerTimeout = TimeSpan.FromSeconds(30.0);
+
+    //
+    // Сводка:
+    //     The default timeout which specifies how long to wait for the handshake to respond
+    //     before closing the connection. Default is 15 seconds.
+    public static readonly TimeSpan DefaultHandshakeTimeout = TimeSpan.FromSeconds(15.0);
+
+    //
+    // Сводка:
+    //     The default interval that the client will send keep alive messages to let the
+    //     server know to not close the connection. Default is 15 second interval.
+    public static readonly TimeSpan DefaultKeepAliveInterval = TimeSpan.FromSeconds(15.0);
+            
+    // Сводка:
+    //     Gets or sets the server timeout interval for the connection.
+    //
+    // Примечания:
+    //     The client times out if it hasn't heard from the server for `this` long.
+    public TimeSpan ServerTimeout { get; set; } = DefaultServerTimeout;
+
+
+    //
+    // Сводка:
+    //     Gets or sets the interval at which the client sends ping messages.
+    //
+    // Примечания:
+    //     Sending any message resets the timer to the start of the interval.
+    public TimeSpan KeepAliveInterval { get; set; } = DefaultKeepAliveInterval;
+
+
+    //
+    // Сводка:
+    //     Gets or sets the timeout for the initial handshake.
+    public TimeSpan HandshakeTimeout { get; set; } = DefaultHandshakeTimeout;
+
+
+
+            */
         }
 
         //private HubConnection HubConnection => _hubConnection ?? throw new InvalidOperationException("HubConnection hasn't been esteblished.");
