@@ -1,16 +1,18 @@
-﻿using hhnl.HomeAssistantNet.Automations.Automation;
-using hhnl.HomeAssistantNet.Shared.Configuration;
-using hhnl.HomeAssistantNet.Shared.Supervisor;
-using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+
+using hhnl.HomeAssistantNet.Automations.Automation;
+using hhnl.HomeAssistantNet.Shared.Configuration;
+using hhnl.HomeAssistantNet.Shared.Supervisor;
+
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace hhnl.HomeAssistantNet.Automations.Supervisor
 {
@@ -21,7 +23,7 @@ namespace hhnl.HomeAssistantNet.Automations.Supervisor
         private readonly HubConnection? _hubConnection;
         private readonly ILogger<SupervisorClient> _logger;
         private readonly Channel<(string MethodName, object? arg1)> _pushMessageChannel = Channel.CreateUnbounded<(string MethodName, object? arg1)>();
-        private Task? _runTask;
+        private readonly Task? _runTask;
         private CancellationTokenSource? _cts;
 
         public SupervisorClient(
@@ -59,7 +61,25 @@ namespace hhnl.HomeAssistantNet.Automations.Supervisor
             _hubConnection.On<long, Guid>(nameof(IManagementClient.StartListenToRunLog), StartListenToRunLog);
         }
 
-        private HubConnection HubConnection => _hubConnection ?? throw new InvalidOperationException("HubConnection hasn't been esteblished.");
+        //private HubConnection HubConnection => _hubConnection ?? throw new InvalidOperationException("HubConnection hasn't been esteblished.");
+
+        public HubConnection HubConnection
+        {
+            get
+            {
+                if (_hubConnection == null)
+                {
+                    throw new InvalidOperationException("HubConnection hasn't been esteblished.");
+                }
+
+                lock (_hubConnection)
+                {
+                    return _hubConnection;
+                }
+            }
+        }
+
+
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
@@ -70,11 +90,11 @@ namespace hhnl.HomeAssistantNet.Automations.Supervisor
             _logger.LogInformation("Supervisor client started");
 
             _cts = new CancellationTokenSource();
-            _runTask = RunAsync().ContinueWith(task =>
-            {
-                if (!_cts.IsCancellationRequested)
-                    _logger.LogError("The run task has completed even though the runner hasn't been stopped.");
-            });
+            //_runTask = RunAsync().ContinueWith(task =>
+            //{
+            //    if (!_cts.IsCancellationRequested)
+            //        _logger.LogError("The run task has completed even though the runner hasn't been stopped.");
+            //});
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
@@ -169,7 +189,13 @@ namespace hhnl.HomeAssistantNet.Automations.Supervisor
 
                 try
                 {
-                    await HubConnection.SendAsync(next.MethodName, next.arg1, cancellationToken: _cts.Token);
+                    if (HubConnection.State == HubConnectionState.Connected)
+                    {
+                        //await MultiTrying(_logger, HubConnection.SendAsync(next.MethodName, next.arg1, cancellationToken: _cts.Token), _cts.Token);
+                        await HubConnection.SendAsync(next.MethodName, next.arg1, cancellationToken: _cts.Token);
+                        _logger.LogInformation($"invoke method {next.MethodName}");
+                        _logger.LogInformation($"-----------------------------");
+                    }
                 }
                 catch (Exception ex)
                 {
