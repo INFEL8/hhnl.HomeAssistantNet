@@ -4,9 +4,9 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <Nullable>enable</Nullable>
         <LangVersion>9.0</LangVersion>
-        <Authors>anhaehne</Authors>
-        <VersionPrefix>0.11.2</VersionPrefix>
-        <PackageProjectUrl>https://github.com/anhaehne/hhnl.HomeAssistantNet</PackageProjectUrl>
+        <Authors>anhaehne, INFEL8</Authors>
+        <VersionPrefix>0.11.6</VersionPrefix>
+        <PackageProjectUrl>https://github.com/INFEL8/hhnl.HomeAssistantNet</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>

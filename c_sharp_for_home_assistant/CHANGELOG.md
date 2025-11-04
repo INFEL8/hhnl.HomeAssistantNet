@@ -2,6 +2,11 @@
 
 !! MAKE SURE TO UPDATE TO THE LATEST NUGET PACKAGES !! 
 
+## [0.11.6] - 2025-10-04
+
+### Added
+- time in log.
+
 ## [0.11.5] - 2025-10-04
 
 ### Added
