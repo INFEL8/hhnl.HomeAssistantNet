@@ -44,7 +44,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
 
             if (!sourceFolder.EnumerateFiles().Any())
             {
-                _logger.LogInformation("No source files found. Copying template.");
+                _logger.LogInformation($"{DateTime.Now} No source files found. Copying template.");
                 CopyFiles("/app/ProjectTemplate", sourceFolder.FullName);
             }
             
@@ -53,7 +53,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
 
             if (!deployFolder.EnumerateFiles().Any())
             {
-                _logger.LogInformation("Running initial build.");
+                _logger.LogInformation($"{DateTime.Now} Running initial build.");
                 await _buildService.StartBuildAndDeployAsync();
                 await _buildService.WaitForBuildAndDeployAsync();
             }

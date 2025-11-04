@@ -39,7 +39,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Hubs
 
             if (remoteAddress is null)
             {
-                _logger.LogError($"Could not determine remote address for connection {Context.ConnectionId}. Aborting connection.");
+                _logger.LogError($"{DateTime.Now} Could not determine remote address for connection {Context.ConnectionId}. Aborting connection.");
                 Context.Abort();
                 return;
             }

@@ -83,7 +83,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e, $"An exception occured while processing notification {notification}.");
+                    _logger.LogError(e, $"{DateTime.Now} An exception occured while processing notification {notification}.");
                     throw;
                 }
             }

@@ -75,7 +75,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Web.Services
                     _needToken = true;
                     return true;
                 default:
-                    throw new HttpRequestException($"Unexpected status code {response.StatusCode} from supervisor api.");
+                    throw new HttpRequestException($"{DateTime.Now} Unexpected status code {response.StatusCode} from supervisor api.");
             }
         }
 
@@ -104,7 +104,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Web.Services
                 case HttpStatusCode.Unauthorized:
                     return false;
                 default:
-                    throw new HttpRequestException($"Unexpected status code {response.StatusCode} from supervisor api.");
+                    throw new HttpRequestException($"{DateTime.Now} Unexpected status code {response.StatusCode} from supervisor api.");
             }
         }
     }

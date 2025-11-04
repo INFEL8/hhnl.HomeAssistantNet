@@ -48,7 +48,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Notifications
 
             public async Task Handle(HubConnectionAddedNotification notification, CancellationToken cancellationToken)
             {
-                _logger.LogDebug($"Got new connection {notification.ConnectionId}.");
+                _logger.LogDebug($"{DateTime.Now} Got new connection {notification.ConnectionId}.");
                 var previousConnection = _managementHubCallService.DefaultConnection;
 
                 _managementHubCallService.DefaultConnection = new SupervisorConnectionInfo(notification.ConnectionId,
@@ -58,22 +58,22 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Notifications
                 // Send intermediate info
                 await _supervisorApiHub.Clients.All.OnConnectionChanged(_managementHubCallService.DefaultConnection);
                 
-                _logger.LogDebug($"Connection {notification.ConnectionId} is now the default connection.");
+                _logger.LogDebug($"{DateTime.Now} Connection {notification.ConnectionId} is now the default connection.");
 
                 if (previousConnection is not null)
                 {
-                    _logger.LogDebug($"Stopping previous connection {previousConnection}.");
+                    _logger.LogDebug($"{DateTime.Now} Stopping previous connection {previousConnection}.");
 
                     // Close previous
                     await _mediator.Send(new StopProcessRequest(previousConnection.Id), cancellationToken);
                 }
                 
-                _logger.LogDebug($"Getting new automations.");
+                _logger.LogDebug($"{DateTime.Now} Getting new automations.");
                 
                 // Load automations
                 var automations = await _hostService.GetAutomationsAsync();
 
-                _logger.LogDebug($"Got {automations.Count} automations.");
+                _logger.LogDebug($"{DateTime.Now} Got {automations.Count} automations.");
                 
                 _managementHubCallService.DefaultConnection.Automations = automations;
                 _managementHubCallService.DefaultConnection.IsComplete = true;

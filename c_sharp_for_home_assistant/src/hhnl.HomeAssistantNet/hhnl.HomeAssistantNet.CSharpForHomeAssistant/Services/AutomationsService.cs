@@ -26,7 +26,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
 
         public async Task<IReadOnlyCollection<AutomationInfoDto>> GetAutomationsAsync()
         {
-            _logger.LogDebug("Getting automation list.");
+            _logger.LogDebug($"{DateTime.Now} Getting automation list.");
             var result = await _managementHubCallService.CallService<IReadOnlyCollection<AutomationInfoDto>>((id, client) =>
                 client.GetAutomationsAsync(id));
             return result ?? Array.Empty<AutomationInfoDto>();
@@ -34,13 +34,13 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
 
         public Task<AutomationInfoDto?> StartAutomationAsync(string name)
         {
-            _logger.LogDebug($"Starting automation '{name}'.");
+            _logger.LogDebug($"{DateTime.Now} Starting automation '{name}'.");
             return _managementHubCallService.CallService<AutomationInfoDto>((id, client) => client.StartAutomationAsync(id, name));
         }
 
         public Task StopAutomationRunAsync(Guid runId)
         {
-            _logger.LogDebug($"Stopping automation run '{runId}'.");
+            _logger.LogDebug($"{DateTime.Now} Stopping automation run '{runId}'.");
             return _managementHubCallService.CallService<bool>((id, client) => client.StopAutomationRunAsync(id, runId));
         }
     }

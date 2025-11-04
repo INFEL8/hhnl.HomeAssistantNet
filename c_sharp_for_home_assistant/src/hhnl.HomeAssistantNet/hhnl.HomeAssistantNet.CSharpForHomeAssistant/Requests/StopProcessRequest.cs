@@ -47,7 +47,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Requests
 
             public class UnableToStopProcessesException : Exception
             {
-                public UnableToStopProcessesException(int processId) : base($"Unable to stop process '{processId}'.")
+                public UnableToStopProcessesException(int processId) : base($"{DateTime.Now} Unable to stop process '{processId}'.")
                 {
                 }
             }

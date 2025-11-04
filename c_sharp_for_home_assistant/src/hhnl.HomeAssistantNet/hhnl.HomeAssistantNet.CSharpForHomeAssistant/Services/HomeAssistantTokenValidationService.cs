@@ -45,10 +45,10 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
 
             if (!IsHostedInAddOn())
             {
-                _logger.LogWarning("Not running in an add-on. This should only appear during development.");
+                _logger.LogWarning($"{DateTime.Now} Not running in an add-on. This should only appear during development.");
                 
                 if(!File.Exists("/config/.storage/auth"))
-                    _logger.LogWarning("No access to auth config.");
+                    _logger.LogWarning($"{DateTime.Now} No access to auth config.");
                 
                 if(string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SUPERVISOR_TOKEN")))
                     _logger.LogWarning("SUPERVISOR_TOKEN not set.");
@@ -68,7 +68,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
 
             if (!TryGetJwt(token, out var jwt))
             {
-                _logger.LogWarning("Unauthorized request! Invalid JWT.");
+                _logger.LogWarning($"{DateTime.Now} Unauthorized request! Invalid JWT.");
                 return false;
             }
 
@@ -77,20 +77,20 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
                 // When we are running inside an add-on we can access the auth config to validate the token.
                 if (!await ValidateJwt(jwt))
                 {
-                    _logger.LogWarning("Unauthorized request! Token validation failed. Token not found or invalid.");
+                    _logger.LogWarning($"{DateTime.Now} Unauthorized request! Token validation failed. Token not found or invalid.");
                     return false;
                 }
             }
             else
             {
-                _logger.LogWarning("Trying to validate JWT by request. This should only happen during development.");
+                _logger.LogWarning($"{DateTime.Now} Trying to validate JWT by request. This should only happen during development.");
 
                 // We are currently not running inside an add-on and have no access to the home assistant config folder.
                 // The only way to validate the token is by sending a request with the token to ha.
                 if (!await ValidateTokenViaRequestAsync(token))
                 {
                     _logger.LogWarning(
-                        "Unauthorized request! Token validation failed. Home assistant responded with 401 Unauthorized.");
+                        $"{DateTime.Now} Unauthorized request! Token validation failed. Home assistant responded with 401 Unauthorized.");
                     return false;
                 }
             }
@@ -130,7 +130,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
 
             if (config is null)
             {
-                _logger.LogError("Unable to load auth config.");
+                _logger.LogError($"{DateTime.Now} Unable to load auth config.");
                 return false;
             }
 
@@ -175,7 +175,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
                 HttpStatusCode.Unauthorized => false,
                 HttpStatusCode.Forbidden => false,
                 HttpStatusCode.OK => true,
-                _ => throw new InvalidOperationException($"Got unexpected status code {response.StatusCode}")
+                _ => throw new InvalidOperationException($"{DateTime.Now} Got unexpected status code {response.StatusCode}")
             };
         }
 

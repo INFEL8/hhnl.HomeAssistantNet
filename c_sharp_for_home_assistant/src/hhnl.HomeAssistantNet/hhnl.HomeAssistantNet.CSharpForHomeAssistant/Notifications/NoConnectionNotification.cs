@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using hhnl.HomeAssistantNet.CSharpForHomeAssistant.Hubs;
 using hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services;
@@ -35,7 +36,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Notifications
             {
                 await _supervisorApiHub.Clients.All.OnConnectionChanged(null);
                 
-                _logger.LogDebug("No client connections. Starting new instance.");
+                _logger.LogDebug($"{DateTime.Now} No client connections. Starting new instance.");
 
                 // А разве тут не должен закрыть приложение?
                 // Соединение пропадает не только потому, что приложение выключилось.

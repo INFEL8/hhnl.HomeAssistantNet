@@ -92,7 +92,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
             var deployPath = Path.GetFullPath(_config.Value.DeployDirectory);
             var dllPath = Path.Combine(deployPath, $"{GetProjectFileName()}.dll");
 
-            _logger.LogInformation($"Starting deployed application: '{dllPath}'");
+            _logger.LogInformation($"{DateTime.Now} Starting deployed application: '{dllPath}'");
 
             ProcessStartInfo? runStartInfo = new ProcessStartInfo
             {
@@ -111,7 +111,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
         {
             try
             {
-                _logger.LogDebug("Starting build and deploy");
+                _logger.LogDebug($"{DateTime.Now} Starting build and deploy");
 
                 var srcDirectory = Path.GetFullPath(_config.Value.SourceDirectory);
                 var buildDirectory = Path.GetFullPath(_config.Value.BuildDirectory);
@@ -126,18 +126,18 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
                 // The src directory is the solution directory so we have to find the automation project.
                 if (!TryFindAutomationProject(buildDirectory, out string? projectDirectory))
                 {
-                    _logger.LogError($"Unable to determine automation project. Make sure the project directly references hhnl.HomeAssistantNet.Automations. SourceDirectory: '{srcDirectory}'");
+                    _logger.LogError($"{DateTime.Now} Unable to determine automation project. Make sure the project directly references hhnl.HomeAssistantNet.Automations. SourceDirectory: '{srcDirectory}'");
                     return;
                 }
 
                 if (_managementHubCallService.DefaultConnection is not null)
                 {
-                    _logger.LogDebug("Stopping connection");
+                    _logger.LogDebug($"{DateTime.Now} Stopping connection");
 
                     await _mediator.Send(new StopProcessRequest(_managementHubCallService.DefaultConnection.Id));
                 }
 
-                _logger.LogDebug("Starting dotnet publish");
+                _logger.LogDebug($"{DateTime.Now} Starting dotnet publish");
 
                 ProcessStartInfo? buildStartInfo = new ProcessStartInfo
                 {
@@ -152,7 +152,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
 
                 if (buildProcess is null)
                 {
-                    _logger.LogError($"Unable to start build process");
+                    _logger.LogError($"{DateTime.Now} Unable to start build process");
                     return;
                 }
 
@@ -176,13 +176,13 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
                 }
                 catch (TaskCanceledException)
                 {
-                    _logger.LogError("Build timed out.");
+                    _logger.LogError($"{DateTime.Now} Build timed out.");
                     return;
                 }
 
                 if (buildProcess.ExitCode != 0)
                 {
-                    _logger.LogError($"dotnet published finished with exit code {buildProcess.ExitCode}.");
+                    _logger.LogError($"{DateTime.Now} dotnet published finished with exit code {buildProcess.ExitCode}.");
                     return;
                 }
 
@@ -250,7 +250,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Services
             // The src directory is the solution directory so we have to find the automation project.
             if (!TryFindAutomationProject(srcDirectory, out string? projectDirectory))
             {
-                throw new InvalidOperationException($"Unable to determine automation project. Make sure the project directly references hhnl.HomeAssistantNet.Automations. SourceDirectory: '{srcDirectory}'");
+                throw new InvalidOperationException($"{DateTime.Now} Unable to determine automation project. Make sure the project directly references hhnl.HomeAssistantNet.Automations. SourceDirectory: '{srcDirectory}'");
             }
 
             string? projectPath = Directory.EnumerateFiles(projectDirectory, "*.csproj").Single();

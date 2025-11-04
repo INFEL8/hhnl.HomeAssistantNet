@@ -62,7 +62,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Middleware
                 if (!AuthenticationHeaderValue.TryParse(authenticationHeader, out var authenticationHeaderValue) ||
                     authenticationHeaderValue.Parameter is null)
                 {
-                    _logger.LogWarning($"Unauthorized request! Unable to parse authorization header. Request: {context.Request.GetDisplayUrl()}");
+                    _logger.LogWarning($"{DateTime.Now} Unauthorized request! Unable to parse authorization header. Request: {context.Request.GetDisplayUrl()}");
                     context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                     return;
                 }
@@ -77,7 +77,7 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Middleware
 
             if (token is null)
             {
-                _logger.LogWarning($"Unauthorized request! Authorization header not set. Request: {context.Request.GetDisplayUrl()}");
+                _logger.LogWarning($"{DateTime.Now} Unauthorized request! Authorization header not set. Request: {context.Request.GetDisplayUrl()}");
                 context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 return;
             }
