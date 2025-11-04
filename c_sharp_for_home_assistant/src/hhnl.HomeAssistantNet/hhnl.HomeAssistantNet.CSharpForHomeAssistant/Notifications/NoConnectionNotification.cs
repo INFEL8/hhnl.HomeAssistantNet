@@ -36,7 +36,19 @@ namespace hhnl.HomeAssistantNet.CSharpForHomeAssistant.Notifications
                 await _supervisorApiHub.Clients.All.OnConnectionChanged(null);
                 
                 _logger.LogDebug("No client connections. Starting new instance.");
-                
+
+                // А разве тут не должен закрыть приложение?
+                // Соединение пропадает не только потому, что приложение выключилось.
+                // Там просто бывает рсигнал отрубается.
+                // а тут запускает новую.
+                // там по макс соединениям (10 рсигнал держит) не пускает новое подключение.
+                // и в итоге будет запускать всё больше копий программы...
+
+                // Добавлю выключение.
+
+
+                _buildService.StopDeployedApplication();
+
                 await _buildService.WaitForBuildAndDeployAsync();
 
                 _buildService.RunDeployedApplication();
