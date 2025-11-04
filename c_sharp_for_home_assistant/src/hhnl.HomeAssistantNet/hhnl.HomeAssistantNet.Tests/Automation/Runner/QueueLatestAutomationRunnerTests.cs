@@ -39,7 +39,7 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
             await EnqueueRunAsync(sut);
 
             // Act
-            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
 
             // Assert
             Assert.IsNotNull(Entry.LatestRun, "No run has been added to the entry.");
@@ -59,7 +59,7 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
             await EnqueueRunAsync(sut);
             var firstAutomationInstance = await WaitForAutomationInstance(1);
             
-            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
             var secondRun = Entry.LatestRun;
 
             // Act
@@ -83,10 +83,10 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
             
             await EnqueueRunAsync(sut);
             var firstAutomationInstance = await WaitForAutomationInstance(1);
-            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
 
             // Act
-            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
 
             // Assert
             Assert.IsNotNull(Entry.LatestRun, "No run has been added to the entry.");
@@ -124,7 +124,7 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
         private static async Task EnqueueRunAsync(AutomationRunner runner)
         {
             var startTcs = new TaskCompletionSource();
-            await runner.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, startTcs, EmptySnapshot);
+            await runner.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, startTcs, EmptySnapshot);
             await Assert.That.TaskCompletesAsync(startTcs.Task, TimeSpan.FromSeconds(1), "Run didn't start in time.");
         }
     }

@@ -2,16 +2,6 @@
 
 !! MAKE SURE TO UPDATE TO THE LATEST NUGET PACKAGES !! 
 
-## [0.11.5] - 2025-10-04
-
-### Added
-- StopDeployedApplication on NoConnectionNotification.
-
-### Changed
-- AutomationEntry lock (_runs).
-- пока убрал автообновление веб страницы. от чего-то падает соединение рсигнала. а так дольше не падает.
-
-
 ## [0.11.4] - 2025-10-02
 
 ### Added
