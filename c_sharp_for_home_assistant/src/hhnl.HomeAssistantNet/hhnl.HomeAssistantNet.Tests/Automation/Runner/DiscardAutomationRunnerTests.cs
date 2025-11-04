@@ -26,7 +26,7 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
             var sut = new DiscardAutomationRunner(Entry, ServiceProvider);
 
             // Act
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
 
             // Assert
             Assert.IsNotNull(Entry.LatestRun, "No run has been added to the entry.");
@@ -40,11 +40,11 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
             Initialize(true);
 
             var sut = new DiscardAutomationRunner(Entry, ServiceProvider);
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
             var firstRun = Entry.LatestRun;
 
             // Act
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
 
             // Assert
             Assert.IsNotNull(Entry.LatestRun, "No run has been added to the entry.");
@@ -60,12 +60,12 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
 
             var sut = new DiscardAutomationRunner(Entry, ServiceProvider);
 
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
             var firstRun = Entry.LatestRun;
             await Assert.That.TaskCompletesAsync(firstRun!.Task, TimeSpan.FromSeconds(1), "First task didn't complete in time.");
 
             // Act
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
 
             // Assert
             Assert.IsNotNull(Entry.LatestRun, "No run has been added to the entry.");
@@ -82,7 +82,7 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
             var sut = new DiscardAutomationRunner(Entry, ServiceProvider);
 
             // Act
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
             
             // Assert
             Assert.IsNotNull(Entry.LatestRun, "No run has been added to the entry.");
@@ -97,7 +97,7 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
 
             var sut = new DiscardAutomationRunner(Entry, ServiceProvider);
 
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
             
             // Act
             await sut.StopAsync();
@@ -117,7 +117,7 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
             var sut = new DiscardAutomationRunner(Entry, ServiceProvider);
 
             // Act
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
 
             // Assert
             Assert.IsNotNull(Entry.LatestRun, "No run has been added to the entry.");
@@ -134,7 +134,7 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
             var sut = new DiscardAutomationRunner(Entry, ServiceProvider);
 
             // Act
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
             await Assert.That.TaskCompletesAsync(Entry.LatestRun!.Task, TimeSpan.FromSeconds(1));
 
             // Assert
@@ -153,7 +153,7 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
             var sut = new DiscardAutomationRunner(Entry, ServiceProvider);
 
             //Act 
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
 
             // Assert
             Assert.IsNotNull(Entry.LatestRun, "No run has been added to the entry.");
@@ -178,7 +178,7 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
             Initialize(true);
 
             var sut = new DiscardAutomationRunner(Entry, ServiceProvider);
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
 
             // Act
             await sut.StopAsync();
@@ -196,7 +196,7 @@ namespace hhnl.HomeAssistantNet.Tests.Automation.Runner
             var sut = new DiscardAutomationRunner(Entry, ServiceProvider);
 
             //Act 
-            await sut.EnqueueAsync(AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
+            await sut.EnqueueAsync(null, AutomationRunInfo.StartReason.Manual, null, null, EmptySnapshot);
 
             // Assert
             Assert.IsNotNull(Entry.LatestRun, "No run has been added to the entry.");
