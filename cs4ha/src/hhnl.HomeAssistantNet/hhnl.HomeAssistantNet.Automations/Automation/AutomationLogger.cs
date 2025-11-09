@@ -40,8 +40,8 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
             lock(runContext.CurrentRun)
                 runContext.CurrentRun.Log.Add(messageDto);
 
-            if (_subscribedRuns.ContainsKey(runContext.CurrentRun.Id))
-                _ = runContext.ServiceProvider.GetRequiredService<SupervisorClient>().OnNewLogMessage(messageDto);
+            //if (_subscribedRuns.ContainsKey(runContext.CurrentRun.Id))
+            //    _ = runContext.ServiceProvider.GetRequiredService<SupervisorClient>().OnNewLogMessage(messageDto);
         }
 
         public static void RegisterRun(Guid runId) => _subscribedRuns.TryAdd(runId, false);
@@ -63,8 +63,8 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
             lock (runContext.CurrentRun)
                 runContext.CurrentRun.Log.Add(messageDto);
 
-            if (_subscribedRuns.ContainsKey(runContext.CurrentRun.Id))
-                _ = runContext.ServiceProvider.GetRequiredService<SupervisorClient>().OnNewLogMessage(messageDto);
+            //if (_subscribedRuns.ContainsKey(runContext.CurrentRun.Id))
+            //    _ = runContext.ServiceProvider.GetRequiredService<SupervisorClient>().OnNewLogMessage(messageDto);
         }
 
         public class Provider : ILoggerProvider

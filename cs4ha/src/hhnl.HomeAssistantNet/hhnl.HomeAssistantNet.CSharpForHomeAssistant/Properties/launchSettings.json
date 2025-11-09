@@ -1,0 +1,28 @@
+{
+  "profiles": {
+    "hhnl.HomeAssistantNet.Supervisor - No Deploy": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "SupervisorConfig__SuppressAutomationDeploy": "true",
+        "SUPERVISOR_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIyNWUzMTU1NmM4NzI0ODEwYjUxNWM4NmU1ZTFiYjFhMiIsImlhdCI6MTc1OTg3MDgwNywiZXhwIjoyMDc1MjMwODA3fQ.W9Z48JMjl0HVLTqaxd9ufEiR2wc-Tv2nzrYaNHOnMYM",
+        "HOME_ASSISTANT_API": "http://192.168.1.63:8123/"
+      },
+      "hotReloadProfile": "aspnetcore",
+      "applicationUrl": "http://localhost:20777",
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
+    },
+    "hhnl.HomeAssistantNet.Supervisor": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "SupervisorConfig__SuppressAutomationDeploy": "true"
+      },
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      "applicationUrl": "http://localhost:20777"
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json"
+}

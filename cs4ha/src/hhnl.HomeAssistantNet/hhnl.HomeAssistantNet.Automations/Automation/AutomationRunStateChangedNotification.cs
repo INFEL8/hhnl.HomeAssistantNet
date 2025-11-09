@@ -20,16 +20,17 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
 
         public class Handler : INotificationHandler<AutomationRunStateChangedNotification>
         {
-            private readonly SupervisorClient _supervisorClient;
+            //private readonly SupervisorClient _supervisorClient;
 
-            public Handler(SupervisorClient supervisorClient)
+            public Handler(/*SupervisorClient supervisorClient*/)
             {
-                _supervisorClient = supervisorClient;
+                //_supervisorClient = supervisorClient;
             }
 
             public Task Handle(AutomationRunStateChangedNotification notification, CancellationToken cancellationToken)
             {
-                return _supervisorClient.OnAutomationsChanged();
+                //return _supervisorClient.OnAutomationsChanged();
+                return Task.CompletedTask;
             }
         }
     }

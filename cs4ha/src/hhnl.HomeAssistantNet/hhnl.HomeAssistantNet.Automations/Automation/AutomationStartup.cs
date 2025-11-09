@@ -61,8 +61,8 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
             services.AddSingleton<IHostedService>(s => s.GetRequiredService<EntityRegistry>());
             services.AddSingleton<IEntityRegistry>(s => s.GetRequiredService<EntityRegistry>());
 
-            services.AddSingleton<SupervisorClient>();
-            services.AddSingleton<IHostedService>(s => s.GetRequiredService<SupervisorClient>());
+            //services.AddSingleton<SupervisorClient>();
+            //services.AddSingleton<IHostedService>(s => s.GetRequiredService<SupervisorClient>());
 
             services.AddSingleton<AutomationService>();
             services.AddSingleton<IHostedService>(s => s.GetRequiredService<AutomationService>());
