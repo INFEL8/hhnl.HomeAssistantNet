@@ -43,10 +43,17 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
                 services.AddTransient(automationClass);
 
             services.Configure<HomeAssistantConfig>(builderContext.Configuration);
+            //services.Configure<HomeAssistantConfigFiled>(builderContext.Configuration.GetSection(nameof(HomeAssistantConfig)));
             services.PostConfigure<HomeAssistantConfig>(config =>
             {
+                var filed = builderContext.Configuration.GetSection(nameof(HomeAssistantConfig));
+                var ghj0 = filed.Get<HomeAssistantConfig>();
+                //var ghj1 = builderContext.Configuration.Get<HomeAssistantConfig>();
+                ////var filed = builderContext.Configuration.GetValue<HomeAssistantConfig>(nameof(HomeAssistantConfig));
+                //{ }
                 // When not configured otherwise we expect to run in a Home Assistant Add-ons.
-                config.HOME_ASSISTANT_API ??= "http://supervisor/core/";
+                config.HOME_ASSISTANT_API ??= ghj0.HOME_ASSISTANT_API ?? "http://supervisor/core/";
+                config.SUPERVISOR_TOKEN ??= ghj0.SUPERVISOR_TOKEN;
             });
 
             services.Configure<AutomationsConfig>(builderContext.Configuration);

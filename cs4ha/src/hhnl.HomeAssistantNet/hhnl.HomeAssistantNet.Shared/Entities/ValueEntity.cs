@@ -10,7 +10,8 @@ namespace hhnl.HomeAssistantNet.Shared.Entities
         {
         }
 
-        public bool ValueIsUnknown => State is null || State?.ToString() == "unknown";
+        public bool ValueIsUnknown => State is null || State == "unknown";
+        public bool IsUnavailable => State == "unavailable";
 
         /// <summary>
         /// Gets the current value of the entity.

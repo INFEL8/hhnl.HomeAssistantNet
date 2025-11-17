@@ -7,4 +7,7 @@ namespace hhnl.HomeAssistantNet.Shared.Configuration
 
         public string SUPERVISOR_TOKEN { get; set; }
     }
+    public class HomeAssistantConfigFiled : HomeAssistantConfig
+    {
+    }
 }
