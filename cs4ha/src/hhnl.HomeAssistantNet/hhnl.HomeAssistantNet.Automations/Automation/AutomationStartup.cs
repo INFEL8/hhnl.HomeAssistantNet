@@ -29,7 +29,15 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
         {
             IHostBuilder? hostBuilder = Host.CreateDefaultBuilder(args);
             ConfigureHost(hostBuilder);
-            return hostBuilder.Build().RunAsync();
+            IHost? host = hostBuilder.Build();
+
+            BeforeRun(host);
+
+            return host.RunAsync();
+        }
+
+        protected virtual void BeforeRun(IHost host)
+        {
         }
 
         private void ConfigureServiceInternal(HostBuilderContext builderContext, IServiceCollection services)
