@@ -25,19 +25,20 @@ namespace hhnl.HomeAssistantNet.Automations.Automation
             _assembly = assemblyToSearchIn?.Assembly ?? Assembly.GetEntryAssembly()!;
         }
 
-        public Task RunAsync(string[] args)
+        public async Task RunAsync(string[] args)
         {
             IHostBuilder? hostBuilder = Host.CreateDefaultBuilder(args);
             ConfigureHost(hostBuilder);
             IHost? host = hostBuilder.Build();
 
-            BeforeRun(host);
+            await BeforeRun(host);
 
-            return host.RunAsync();
+            await host.RunAsync();
         }
 
-        protected virtual void BeforeRun(IHost host)
+        protected virtual Task BeforeRun(IHost host)
         {
+            return Task.CompletedTask;
         }
 
         private void ConfigureServiceInternal(HostBuilderContext builderContext, IServiceCollection services)
